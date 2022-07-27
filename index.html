@@ -330,92 +330,24 @@
         $.ajax({
             type: 'POST',
             crossOrigin: true,
-            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/oauth2/token',
+            url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
             dataType: 'json',
             cache :false,
-            /*data : {"grant_type":"refresh_token","client_id":"3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG", 
-                    //"client_secret":"F864BDD8ADFB8B17EA27F0623CF9039A503A76F9312032654DBFFDB25E87B142",
-                    "client_assertion":"{iss:3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG,sub:3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG,aud:https://protocomdev-dev-ed.my.salesforce.com/services/oauth2/token,exp:1333685628}",
-                    "client_assertion_type":"urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-                    "refresh_token":"5Aep861mdLLi91HqFfCpXYtQXRaOgcHsK1gi36_cVHboubUhDFRrSCX9zyL1KBPgaR5qiKjUA54Q0RZhiN_teRI"},*/
-            data : {"grant_type":"urn:ietf:params:oauth:grant-type:jwt-bearer",
-                    "assertion":"eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiIzTVZHOXBSenZNa2pNYjZuc0xzbVR4X0ZxQjZiYkhJbmZ1eUxpeDBfakxybkVqYnQycW9ENTNweWtlaW1FZlVOSndxc2ZTUURMdlQ0MC5xR0pXeFBiIiwic3ViIjoibm9ybWFsQHByb3RvLmNvbS5kZXYiLCJhdWQiOiJodHRwczovL2xvZ2luLnNhbGVzZm9yY2UuY29tIiwiZXhwIjoiMTY3NDIzMjI2OSJ9.BWpmsKOSqBRVy5cMEUQZUf24e2qMP_wZ5ePMU8fRcGyA5jd0yaQxm3trL_8XHMNWHMZ1yeq20MikvpMB3lGakqUg_tsxXkP-9aL5uxv4vksqzYx6DVfZmvnBUeJbeLp9WMTymr6rL-Jp9IFIUOnTgLNCnpjri9356itnj4lD4T7mzisWfhT7lqhSiwDX7dC_2XlO8W8WMf6OLhekRdTtV-tt-Yt33UpLSou0KF1wXmuBm0jKF4cjG6XGOKAORRCwb2tlf6lEpX1iitqhd2Rvsoj8itiYA6fSqdpZV602r5-dYWLOKEbR-jaL37E5IzOWOOWiBPMj4nJJDDv95Emzmg"},
+            data : {"grant_type":"refresh_token",
+                    "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                    "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
             success : function (connectData) {
                 var accToken = 'Bearer ' + connectData.access_token;
                 $.ajax({
                     type: 'GET',
                     crossOrigin: true,
-                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/PPB_Inquiry__c/A0000001',
+                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/apexrest/IMF_Case',
                     dataType: 'json',
                     cache :false,
+                    data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
                     headers: {"Authorization" : accToken},
                     success : function (res) {
-                        // データを取得できた場合
-                        if(res.length != 0){
-                            // template要素を取得
-                            var template = document.getElementById('template');
-                            // データの数分繰り返し
-                            for(var i = 0; i < res.length; i++){
-                                // template要素の内容を複製
-                                var clone = template.content.cloneNode(true);
-                                // 複製したtemplate要素にデータを挿入
-                                clone.querySelector('.CreatedDate').textContent = res[i].CreatedDate;
-                                clone.querySelector('.Classification__c').textContent = res[i].Classification__c;
-                                clone.querySelector('.Inquiry__c').textContent = res[i].Inquiry__c;
-                                // div#containerの中に追加
-                                document.getElementById('pastInquiry').appendChild(clone);
-                            }
-                            
-                            console.log('ファイル取得');
-                            $.ajax({
-                                //beforeSend: function(xhr){
-                                    //xhr.overrideMimeType('text/html;charset=Shift_JIS');
-                                    //xhr.overrideMimeType('text/html;charset=utf-8');
-                                //},
-                                type: 'GET',
-                                crossOrigin: true,
-                                //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JD6IAAW/VersionData', // png
-                                //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // エクセル
-                                //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ワード
-                                //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // パワポ
-                                //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzpAAG/VersionData', // PDF
-                                //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzlAAG/VersionData', // JPG
-                                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JF0JAAW/VersionData', // zip
-                                cache :false,
-                                //scriptCharset: 'Shift_JIS',
-                                headers: {"Authorization" : accToken},
-                                xhrFields : {responseType : 'blob'},
-                                success : function (dlFile) {
-                                    var binaryData = [];
-                                    binaryData.push(dlFile);
-                                    const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                    // ボタンでファイルDL 追加
-                                    var target = document.getElementById("searchLink");
-                                    target.href = url;
-                                    target.innerText = "ファイルDL";
-                                    target.download="test.zip"
-                                    // 追加終わり
-                                    /* 自動ファイルDL コメントアウト
-                                    const a = document.createElement("a");
-                                    document.body.appendChild(a);
-                                    //a.download = 'test.png';
-                                    //a.download = 'test.xlsx';
-                                    //a.download = 'test.docx';
-                                    //a.download = 'test.pptx';
-                                    //a.download = 'test.pdf';
-                                    //a.download = 'test.jpg';
-                                    a.download = 'test.zip';
-                                    a.href = url;
-                                    a.click();
-                                    a.remove();*/
-                                },
-                                error : function (data, errorThrown,status) {
-                                    console.log(data);
-                                    console.log(errorThrown);
-                                    console.log(status);
-                                }
-                            })
-                        }
+                        console.log(res);
                     },
                     error : function (data, errorThrown,status) {
                         
@@ -427,163 +359,6 @@
                 console.log(data);
                 console.log(errorThrown);
                 console.log(status);
-            }
-        });
-    }
-    var files = document.getElementById( "inputFile" ) ;
-    var inputFile;
-    var fileName;
-    files.onchange = function () {
-    var fileReader = new FileReader() ;
-    fileReader.onload = function () {
-        var baseFile = this.result ;
-        var spFile = baseFile.split(',');
-        inputFile = spFile[1];
-    }
-    var file = files.files[0] ;
-        fileName = file.name;
-    fileReader.readAsDataURL( file ) ;
-    }
-    function send() {
-        // アクセストークン取得（リフレッシュトークンフロー） Ajax
-        $.ajax({
-            type: 'POST',
-            crossOrigin: true,
-            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/oauth2/token',
-            dataType: 'json',
-            cache :false,
-            data : {"grant_type":"refresh_token","client_id":"3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG", "client_secret":"F864BDD8ADFB8B17EA27F0623CF9039A503A76F9312032654DBFFDB25E87B142","refresh_token":"5Aep861mdLLi91HqFfCpXYtQXRaOgcHsK1gi36_cVHboubUhDFRrSCX9zyL1KBPgaR5qiKjUA54Q0RZhiN_teRI"},
-            success : function (connectData) {
-                // ファイル読み込み
-                var reader = new FileReader();
-                // アクセストークン
-                var accToken = 'Bearer ' + connectData.access_token;
-                // ご用件を取得
-                const classificationValue = document.getElementById("classification").value;
-                // お問い合わせ内容を取得
-                const inquiryValue = document.getElementById("inquiry").value;
-                
-                var inputData = {};
-                inputData.AccountNumber = 'A0000001';
-                inputData.Classification = classificationValue;
-                inputData.Inquiry = inquiryValue;
-                //inputData.File = inputFile ;
-                inputData.File = '' ;
-                // Rest ApexへパラメータをJSON形式に変換
-                var data = JSON.stringify( inputData );
-                
-                $.ajax({
-                    type: 'POST',
-                    crossOrigin: true,
-                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/PPB_Inquiry__c/',
-                    cache :false,
-                    headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
-                    dataType: 'json',
-                    data : data,
-                    success : function (res) {
-                        if(res.length != 0){
-                            var insId = res[0].Id;
-                
-                            var formElement = document.getElementById('inquiryForm');
-                            formElement.reset();
-                    
-                            var oldPastInquiry = document.getElementById('pastInquiry');
-                            var removeOldPastInquiry = oldPastInquiry.querySelectorAll('tr');
-                    
-                            for(var i = 1; i < removeOldPastInquiry.length; i++){
-                                removeOldPastInquiry[i].parentNode.removeChild(removeOldPastInquiry[i])
-                            }
-                            // template要素を取得
-                            var template = document.getElementById('template');
-                            for(var i = 0; i < res.length; i++){
-                                // template要素の内容を複製
-                                var clone = template.content.cloneNode(true);
-                                // 複製したtemplate要素にデータを挿入
-                                clone.querySelector('.CreatedDate').textContent = res[i].CreatedDate;
-                                clone.querySelector('.Classification__c').textContent = res[i].Classification__c;
-                                clone.querySelector('.Inquiry__c').textContent = res[i].Inquiry__c;
-                                // div#containerの中に追加
-                                document.getElementById('pastInquiry').appendChild(clone);
-                            }
-                            // ここからcontentsvesionに登録する処理
-                            console.log(inputFile);
-                            //Salesforceにアップロードするためのbodyを作成
-                            var cvJson = {
-                                "Title" : fileName,  //アップされるファイルのタイトル
-                                "PathOnClient" : fileName, 
-                                "VersionData" : inputFile
-                            };
-                            $.ajax({
-                                type: 'POST',
-                                crossOrigin: true,
-                                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion',
-                                cache :false,
-                                headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
-                                dataType: 'json',
-                                data : JSON.stringify(cvJson),
-                                success : function (contentversionres) {
-                                    var cvId = contentversionres.id;
-                                    //content versionに紐付いて作成されたcontent documentのIDを取得
-                                    var query = "SELECT+ContentDocumentId+FROM+ContentVersion+WHERE+Id+=+'" + cvId + "'"
-                                    $.ajax({
-                                        type: 'GET',
-                                        crossOrigin: true,
-                                        url: "https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/query/?q=" + query,
-                                        cache :false,
-                                        headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
-                                        success : function (DocumentIdRes) {
-                                            var cdRecords = DocumentIdRes["records"];
-                                            var cdId = cdRecords[0].ContentDocumentId;
-                                            //お問い合せレコードとリンクさせるためのbodyを作成
-                                            var linkJson = {
-                                                "ContentDocumentId" : cdId,
-                                                "LinkedEntityId" : insId, //お問い合せのレコードID
-                                                "Visibility" : "AllUsers" //閲覧できる人の制限
-                                            };
-                                            console.log(cdId);
-                                            console.log(insId);
-                                            $.ajax({
-                                                type: 'POST',
-                                                crossOrigin: true,
-                                                url: "https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentDocumentLink",
-                                                cache :false,
-                                                headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
-                                                dataType: 'json',
-                                                data : JSON.stringify(linkJson),
-                                                success : function (contentdocumentRes) {
-                                                    console.log('送信完了');
-                                                },
-                                                error : function (data, errorThrown,status) {
-                                                    console.log(data);
-                                                    console.log(errorThrown);
-                                                    console.log(status);
-                                                }
-                                            })
-                                        },
-                                        error : function (data, errorThrown,status) {
-                                            console.log(data);
-                                            console.log(errorThrown);
-                                            console.log(status);
-                                        }
-                                    })
-                                },
-                                error : function (data, errorThrown,status) {
-                                    console.log(data);
-                                    console.log(errorThrown);
-                                    console.log(status);
-                                }
-                            })
-                            //ここまで
-                        }
-                    },
-                    error : function (data, errorThrown,status) {
-                        console.log(data);
-                        console.log(errorThrown);
-                        console.log(status);
-                    }
-                })
-            },
-            error : function (data, errorThrown,status) {
             }
         });
     }
