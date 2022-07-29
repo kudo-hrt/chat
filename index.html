@@ -341,24 +341,13 @@
                 $.ajax({
                     type: 'GET',
                     crossOrigin: true,
-                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/data/v55.0/sobjects/ContentVersion/0680l000002Qlb3AAC/VersionData',
+                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/apexrest/IMF_Case',
+                    dataType: 'json',
                     cache :false,
+                    data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
                     headers: {"Authorization" : accToken},
-                    xhrFields : {responseType : 'blob'},
                     success : function (res) {
-                        /*
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.stringify(res).length);
                         console.log(res);
-                        var binaryData = [];
-                        binaryData.push(res);
-                        console.log(binaryData);
-                        */
-                        var binaryData = [];
-                        binaryData.push(res);
-                        const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                        console.log(url);
-
                     },
                     error : function (data, errorThrown,status) {
                         
