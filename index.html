@@ -339,6 +339,19 @@
             success : function (connectData) {
                 var accToken = 'Bearer ' + connectData.access_token;
                 $.ajax({
+                    type: 'POST',
+                    crossOrigin: true,
+                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/apexrest/IMF_Case/',
+                    cache :false,
+                    headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
+                    dataType: '{"EncryptedData":"d5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef","Subject":"キャッシュカード","Content":"○○は△△でしょうか？","LinkedDial":"各種手続きダイヤル"}',
+                    data : data,
+                    success : function (res) {
+                        console.log('登録成功');
+                    }
+                });
+                /*
+                $.ajax({
                     type: 'GET',
                     crossOrigin: true,
                     url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/apexrest/IMF_Case',
@@ -389,7 +402,7 @@
                         
                     }
                 })
-                
+            */
             },
             error : function (data, errorThrown,status) {
                 console.log(data);
