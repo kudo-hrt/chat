@@ -338,6 +338,7 @@
                     "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
             success : function (connectData) {
                 var accToken = 'Bearer ' + connectData.access_token;
+                /*
                 $.ajax({
                     type: 'POST',
                     crossOrigin: true,
@@ -350,7 +351,7 @@
                         console.log('登録成功');
                     }
                 });
-                /*
+                */
                 $.ajax({
                     type: 'GET',
                     crossOrigin: true,
@@ -402,7 +403,6 @@
                         
                     }
                 })
-            */
             },
             error : function (data, errorThrown,status) {
                 console.log(data);
