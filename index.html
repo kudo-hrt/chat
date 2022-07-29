@@ -346,12 +346,18 @@
                     headers: {"Authorization" : accToken},
                     xhrFields : {responseType : 'blob'},
                     success : function (res) {
+                        /*
                         console.log(JSON.stringify(res));
                         console.log(JSON.stringify(res).length);
                         console.log(res);
                         var binaryData = [];
                         binaryData.push(res);
                         console.log(binaryData);
+                        */
+                        var binaryData = [];
+                        binaryData.push(res);
+                        const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
+                        console.log(url);
 
                     },
                     error : function (data, errorThrown,status) {
