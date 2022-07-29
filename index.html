@@ -348,6 +348,9 @@
                     success : function (res) {
                         console.log(JSON.stringify(res));
                         console.log(res);
+                        var binaryData = [];
+                        binaryData.push(res);
+                        console.log(binaryData);
 
                     },
                     error : function (data, errorThrown,status) {
