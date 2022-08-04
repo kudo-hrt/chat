@@ -496,15 +496,7 @@
 		//linkedStr = $('input[name="SFConnectParam"]').val();
         linkedStr = 'bd1fcec2a09397bdac42bdba68beca74a28e90a646bffae6d0b2f3a376aa9993';
 		// ホーム画面を表示
-		document.getElementById('inquiryForm').style.display = 'block';
-		// それ以外を非表示
-		document.getElementById('noInq').style.display = 'none';
-		document.getElementById('detailsScreen').style.display = 'none';
-		document.getElementById('inqInputScreen').style.display = 'none';
-		document.getElementById('inqConfirmScreen').style.display = 'none';
-		document.getElementById('replyInputScreen').style.display = 'none';
-		document.getElementById('replyConfirmScreen').style.display = 'none';
-		document.getElementById('compScreen').style.display = 'none';
+		changeDisp('inquiryForm');
 		
 		$("#outputCbdTemp").on("click", ".contbrd-cont", function(){
 			$(this).toggleClass("open");
@@ -749,6 +741,52 @@
 
 			return;
 		}
+		
+		// お問い合わせ詳細
+		document.getElementById('inqTextInput').value = null;
+		if($("#inqTextInput").val() == ''){
+			// 黄色
+			$("#inqTextInput").css('background', '#ffffcc');
+		}
+		// お問い合わせ種類が入力されている
+		let inqTypeElem = document.getElementById('Modal-aaa');
+		if(!inqTypeElem.classList.contains('reqEntry')){
+			inqTypeElem.classList.remove('inputSelectItem-on');
+			inqTypeElem.classList.remove('data-on');
+			inqTypeElem.classList.add('reqEntry');
+			inqTypeElem.innerHTML = '選択してください';
+			let choiceList = document.getElementsByName('aaa');
+			for(i = 0; i < choiceList.length; i++){
+				choiceList[i].checked="";
+			}
+		}
+		// 新規のファイル出力先に子要素があればTRUE
+        const inqFileElemcheck = document.getElementById('inqFileList').hasChildNodes();
+        // 子要素があるかどうかチェック
+        if(inqFileElemcheck){
+			let inqFileElem = document.getElementById('inqFileList');
+            // 子要素が無くなるまで削除
+            while(inqFileElem.firstChild){
+				inqFileElem.removeChild(inqFileElem.firstChild);
+            }
+        }
+		// 個別の投稿内容
+		document.getElementById('cbdTextInput').value = null;
+		if($("#cbdTextInput").val() == ''){
+			// 黄色
+			$("#cbdTextInput").css('background', '#ffffcc');
+		}
+		// 個別のファイル出力先に子要素があればTRUE
+        const cbdFileElemcheck = document.getElementById('cbdFileList').hasChildNodes();
+        // 子要素があるかどうかチェック
+        if(cbdFileElemcheck){
+            let cbdFileElem = document.getElementById('cbdFileList');
+            // 子要素が無くなるまで削除
+            while(cbdFileElem.firstChild){
+                cbdFileElem.removeChild(cbdFileElem.firstChild);
+            }
+        }
+
 		// 出力先要素に子要素があればTRUE
         const elemcheck = document.getElementById('listQa').hasChildNodes();
         // 子要素があるかどうかチェック
@@ -1275,10 +1313,12 @@
 						}
 					},
 					error:function (data, errorThrown, status) {
+						dispRegisComErrModal();
 					}
 				});
 			},
 			error:function (data, errorThrown, status) {
+				dispRegisComErrModal();
 			}
 		});
 	}
