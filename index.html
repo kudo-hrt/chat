@@ -1340,7 +1340,7 @@
 						newDisplayFlag = true;
 					}
 					
-					cbdFileList[i].isNew = newDisplayFlag;
+					cbdFileList[j].isNew = newDisplayFlag;
 				}
 			}
 		}
@@ -1386,7 +1386,6 @@
 			}
 			// コンタクトボード明細の作成日を日付をJSTに変換する処理を呼び出して、設定する
 			clone.querySelector('.createddate').textContent = changeSlashDate(cbd.CreatedDate);
-			clone.querySelector('.outputNew').id = 'new' + cbd.Id;
 			clone.querySelector('.contbrd-txt').id = 'file' + cbd.Id;
 			// 繰り返し初回の場合
 			if(i == 0){
