@@ -1701,7 +1701,7 @@
 	function checkVal(content){
         // 値がない場合、エラー
         if(!content){return true}
-        return (content <= 2000) ? false : true
+        return (content.length <= 2000) ? false : true
     }
 
 	/**
