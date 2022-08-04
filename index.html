@@ -1644,11 +1644,11 @@
 		        
         document.getElementById("cbdUploadFiles").innerHTML = null;
 		
-	for(let i = 0; i < inputFiles.length; i++){
-		const p = document.createElement("p");
-		p.innerText  inputFiles[i].name;
-		document.getElementById("cbdUploadFiles").appendChild(p);
-	}
+		for(let i = 0; i < inputFiles.length; i++){
+			const p = document.createElement("p");
+			p.innerText  inputFiles[i].name;
+			document.getElementById("cbdUploadFiles").appendChild(p);
+		}
         
         changeDisp('replyConfirmScreen');
 	}
